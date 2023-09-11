@@ -1,42 +1,37 @@
-import unittest
-from datetime import date
-
-
-from Renter import Renter
 from Car import Car
 from Criteria import Criteria
+from Renter import Renter
 from CarRentalCompany import CarRentalCompany
 
-# This class tests the CarRentalCompany class.
-class CarRentalTest(unittest.TestCase):
+# Create car rental facade
+car_rental = CarRentalCompany()
 
-    CAR1 = Car("VW", "Golf", "XX11 1UR", "B2", 90)
-    CAR2 = Car("VW", "Passat", "XX12 2UR", "C1", 110)
-    CAR3 = Car("VW", "Polo", "XX13 3UR", "A1", 65)
-    CAR4 = Car("VW", "Polo", "XX14 4UR", "A1", 70)
+# Create cars and add them to the car rental system
+car1 = Car("Toyota", "Camry", "ABC123", "Economy", 50)
+car2 = Car("Honda", "Civic", "XYZ789", "Economy", 55)
+car3 = Car("Ford", "Mustang", "DEF456", "Luxury", 100)
 
-    RENTER1 = Renter("Hydrogen", "Joe", "HYDRO010190JX8NM", date(1990, 1, 1))
-    RENTER2 = Renter("Calcium", "Sam", "CALCI010203SX8NM", date(2003, 2, 1))
-    RENTER3 = Renter("Neon", "Maisy", "NEONN010398MX8NM", date(1998, 3, 1))
-    RENTER4 = Renter("Carbon", "Greta", "CARBO010497GX8NM", date(1997, 4, 1))
+car_rental.add_car(car1, None, None)  # Add car1 without date restrictions
+car_rental.add_car(car2, None, None)  # Add car2 without date restrictions
+car_rental.add_car(car3, None, None)  # Add car3 without date restrictions
 
-    def test_list_cars_available_to_rent_gives_more_than_one_car(self):
-        car_rental_company = CarRentalCompany()
-        car_rental_company.add_car(self.CAR1)
-        car_rental_company.add_car(self.CAR2)
-        car_rental_company.add_car(self.CAR3)
-        car_rental_company.add_car(self.CAR4)
-       
+# Create a renter
+renter = Renter("Doe", "John", "DL12345", "1990-01-15")
 
-        criteria = Criteria()
-        criteria.cost_criteria(70)
-        cars_available = car_rental_company.matching_cars(criteria)
-        for i in cars_available:
-            print(i.make, i.model, i.registration_number, i.rental_group, i.cost_per_day)
+# Define criteria
+criteria = Criteria()
+criteria.cost_criteria(60)  # Set maximum cost criteria
 
-        self.assertGreater(len(cars_available), 1)
+# Test renting a car
+print("Renting a car:")
+car_rental.rent_car(renter, "2023-09-15", criteria)
 
+# Test returning a car
+print("\nReturning the car:")
+car_rental.return_car(renter, "2023-09-15")
 
-if __name__ == '__main__':
-    CarRentalTest1= CarRentalTest()
-    CarRentalTest.test_list_cars_available_to_rent_gives_more_than_one_car(CarRentalTest1)
+# Check bookings
+print("\nBookings:")
+bookings = car_rental.get_bookings()
+for booking in bookings:
+    print(f"Renter: {booking.renter.first_name} {booking.renter.last_name}, Car: {booking.car.make} {booking.car.model}, Date: {booking.date}")
