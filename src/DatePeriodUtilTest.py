@@ -1,6 +1,6 @@
 from datetime import date
-from main.utils.DatePeriodUtil import DatePeriodUtil
-from main.utils.DatePeriod import DatePeriod
+from src.DatePeriodUtil import DatePeriodUtil
+from src.DatePeriod import DatePeriod
 import unittest
 
 

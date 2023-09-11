@@ -1,6 +1,6 @@
 import unittest
 from datetime import date
-from main.utils.DatePeriod import DatePeriod
+from src.DatePeriod import DatePeriod
 
 
 class DatePeriodTest(unittest.TestCase):

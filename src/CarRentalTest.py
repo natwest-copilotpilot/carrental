@@ -1,11 +1,13 @@
 import unittest
 from datetime import date
-from main.rental.Renter import Renter
-from main.rental.Car import Car
-from main.rental.Criteria import Criteria
-from main.rental.CarRentalCompany import CarRentalCompany
 
 
+from Renter import Renter
+from Car import Car
+from Criteria import Criteria
+from CarRentalCompany import CarRentalCompany
+
+# This class tests the CarRentalCompany class.
 class CarRentalTest(unittest.TestCase):
 
     CAR1 = Car("VW", "Golf", "XX11 1UR", "B2", 90)
@@ -29,3 +31,8 @@ class CarRentalTest(unittest.TestCase):
         cars_available = car_rental_company.matching_cars(criteria)
 
         self.assertGreater(len(cars_available), 1)
+
+
+if __name__ == '__main__':
+    CarRentalTest1= CarRentalTest()
+    CarRentalTest.test_list_cars_available_to_rent_gives_more_than_one_car(CarRentalTest1)
