@@ -12,13 +12,7 @@ class CarRentalCompany:
         if criteria.get_cost_criteria() is not None:
             with self.lock:
               return [car for car in self.cars if car.cost_per_day <= criteria.get_cost_criteria()]
-            """cars_available = []
-            for car in self.cars:
-                 if car.cost_per_day <= criteria.get_cost_criteria():
-                     cars_available.append(car)
-            return cars_available
-            """
-
+    
     def rent_car(self, renter, car):
         pass
 
